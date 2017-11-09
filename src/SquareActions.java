@@ -1,3 +1,3 @@
 public interface SquareActions {
-    void movePlayer();
+    void movePlayer(Player p);
 }

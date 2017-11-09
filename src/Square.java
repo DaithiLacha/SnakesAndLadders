@@ -1,4 +1,5 @@
 public class Square implements SquareActions {
+    private String name;
     private int squareNum;
     private int move;
 
@@ -7,8 +8,17 @@ public class Square implements SquareActions {
     }
 
     public Square(int squareNum) {
+        setName("Default");
         setSquareNum(squareNum);
-        setMove((int)(Math.random()* 10) + 5);
+        setMove(0);
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getSquareNum() {
@@ -27,12 +37,12 @@ public class Square implements SquareActions {
         this.move = change;
     }
 
-    public void movePlayer() {
+    public void movePlayer(Player p) {
 
     }
-    
+
     @Override
     public String toString() {
-        return "Square Number: " + getSquareNum();
+        return "Square Type: " + getName() + "\nSquare Number: " + getSquareNum();
     }
 }
