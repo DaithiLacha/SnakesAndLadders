@@ -8,7 +8,8 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener {
     Square[][] board;
 
     public SnakesAndLaddersGUI() {
-
+        newGame();
+        setTitle("Snakes and Ladders");
     }
 
     public void newGame() {
@@ -32,11 +33,19 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener {
         board = new Square[10][10];
         for(int i = 0; i < 10; i++) {
             for(int j = 0; j < 10; j++) {
-                if(i > 1 && (j % 6 == 0)) {
+                if((i != 0) && (i % 2 == 0) && (j == 6)) {
                     String num = "" + i + "" + j;
                     int number = Integer.parseInt(num);
                     board[i][j] = new Snake(number);
-                }else if(i < 9 && (j % 3 == 0)) {
+                }else if((i % 2 != 0) && (j  == 1)) {
+                    String num = "" + i + "" + j;
+                    int number = Integer.parseInt(num);
+                    board[i][j] = new Snake(number);
+                }else if((i % 2 == 0) && (j == 3)) {
+                    String num = "" + i + "" + j;
+                    int number = Integer.parseInt(num);
+                    board[i][j] = new Ladder(number);
+                }else if(i < 9 && (i % 2 != 0) && (j == 9)) {
                     String num = "" + i + "" + j;
                     int number = Integer.parseInt(num);
                     board[i][j] = new Ladder(number);
