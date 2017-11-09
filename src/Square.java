@@ -8,8 +8,8 @@ public class Square implements SquareActions {
     }
 
     public Square(int squareNum) {
-        setName("Default");
         setSquareNum(squareNum);
+        setName("Default");
         setMove(0);
     }
 
