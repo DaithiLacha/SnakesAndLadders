@@ -3,13 +3,12 @@ public class Player extends Person {
     private Token token;
 
     public Player() {
-       this("Unknown", "Unspecified");
+       this("Unknown");
     }
 
-    public Player(String name, String colour) {
+    public Player(String name) {
         super(name);
         setPosition(0);
-        setToken(new Token(colour));
     }
 
     public int getPosition() {
