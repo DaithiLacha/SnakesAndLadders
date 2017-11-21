@@ -5,12 +5,18 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
-    JMenu fileMenu;
-    ArrayList<Player> players;
-    Square[][] board;
+    JMenu fileMenu, playerMenu;
+    static ArrayList<Player> players;
+    JPanel boardPanel, boardPanel2;
     GridLayout boardLayout;
     JPanel[][] panelHolder = new JPanel[10][10];
-
+    static int count = 0;
+    JButton player1Roll ,player2Roll, player3Roll, player4Roll;
+    static ImageIcon blue = new ImageIcon("images/bluePiece.png");
+    static ImageIcon red = new ImageIcon("images/redPiece.png");
+    static ImageIcon green = new ImageIcon("images/greenPiece.png");
+    static ImageIcon yellow = new ImageIcon("images/yellowPiece.png");
+    private static int counter = 0;
     public static void main(String[] args) {
         SnakesAndLaddersGUI frame = new SnakesAndLaddersGUI();
         frame.setVisible(true);
@@ -19,15 +25,14 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
     public SnakesAndLaddersGUI() {
         newGame();
         ImageIcon snake = new ImageIcon("images/Snake.png");
-        ImageIcon blue = new ImageIcon("images/bluePiece.png");
         ImageIcon ladder = new ImageIcon("images/Ladder.png");
         setTitle("Snakes and Ladders");
         setSize(1500, 850);
         Container pane = getContentPane();
-        JPanel boardPanel = new JPanel();
+        boardPanel = new JPanel();
         boardPanel.setLayout(null);
-        JPanel boardPanel2 = new JPanel();
-        boardPanel2.setLayout(new BorderLayout());
+        boardPanel2 = new JPanel();
+        boardPanel2.setLayout(new FlowLayout());
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, boardPanel2);
         pane.add(splitPane);
         boardLayout = new GridLayout(10, 10);
@@ -76,37 +81,87 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                 }
             }
         }
-        panelHolder[2][4].add(new JLabel(blue));
+        //panelHolder[2][4].add(new JLabel(blue));
         JButton button1 = new JButton("Roll Dice");
         button1.setBounds(20,250, 100, 62);
         boardPanel2.add(button1);
         button1.addActionListener(this);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+        createFileMenu();
+        createPlayerMenu();
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        menuBar.add(fileMenu);
+        menuBar.add(playerMenu);
     }
 
-    public void newGame() {
-        //newPlayerSet();
+    private void createFileMenu(){
+        fileMenu = new JMenu("File");
+        JMenuItem item;
+        item = new JMenuItem("Save");
+        item.addActionListener(this);
+        fileMenu.add(item);
+        item = new JMenuItem("Open");
+        item.addActionListener(this);
+        fileMenu.add(item);
+        item = new JMenuItem("New");
+        item.addActionListener(this);
+        fileMenu.add(item);
+        fileMenu.addSeparator();
+        item = new JMenuItem("Quit");
+        item.addActionListener(this);
+        fileMenu.add(item);
     }
 
-    public void newPlayerSet() {
-        players = new ArrayList<>();
-        int ans =JOptionPane.showConfirmDialog(null, "Add new player?",
-                    "Add Player", JOptionPane.YES_NO_OPTION);
-        while(players.size() < 4) {
-            while (ans == JOptionPane.YES_OPTION) {
-                String name = JOptionPane.showInputDialog("Enter player name");
-                players.add(new Player(name));
-                ans = JOptionPane.showConfirmDialog(null, "Add new player?",
-                        "Add Player", JOptionPane.YES_NO_OPTION);
-            }
+    private void createPlayerMenu(){
+        playerMenu = new JMenu("Player");
+        JMenuItem item;
+        item = new JMenuItem("Add");
+        item.addActionListener(this);
+        playerMenu.add(item);
+        item = new JMenuItem("Display");
+        item.addActionListener(this);
+        playerMenu.add(item);
+    }
+
+    public void addPlayer() {
+        String name = JOptionPane.showInputDialog("Enter Name");
+        players.add(new Player(name));
+        ColourGUI frame = new ColourGUI();
+        frame.setVisible(true);
+//        if(count == 0) {
+//            player1Roll = new JButton("Player 1 Roll");
+//            boardPanel.add(player1Roll);
+//            player1Roll.addActionListener(this);
+//        }
+    }
+
+    public void displayPlayers() {
+        String playerDetails = "";
+        for(Player p : players) {
+            playerDetails += p.toString();
         }
+        JOptionPane.showMessageDialog(null, playerDetails);
+    }
+
+    public void newGame(){
+        players = new ArrayList<>();
+        count = 0;
     }
 
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Roll Dice")) {
-            JOptionPane.showMessageDialog(null, "Hello");
-
+            if(players.size() == 0) {
+                JOptionPane.showMessageDialog(null, "You must add a player before they can roll the dice");
+            }else{
+                players.get(counter).rollDice();
+            }
+        }else if(e.getActionCommand().equals("Add")) {
+            addPlayer();
+        }else if(e.getActionCommand().equals("Display")) {
+            displayPlayers();
+        }else if(e.getActionCommand().equals("New")) {
+            newGame();
         }
 
     }
