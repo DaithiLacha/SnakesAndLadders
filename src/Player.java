@@ -8,7 +8,7 @@ public class Player extends Person {
 
     public Player(String name) {
         super(name);
-        setPosition(0);
+        setPosition(90);
     }
 
     public int getPosition() {
