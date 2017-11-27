@@ -71,9 +71,9 @@ public class DetermineSquareType {
         }
         JOptionPane.showMessageDialog(null, "You landed on a ladder advance " + ladderLength + " spaces");
         if(ladderLength > 9) {
-            p.setPosition(p.getPosition() - (ladderLength + 3));
+            p.setPosition(p.getPosition() - (ladderLength - 3));
         }else {
-            p.setPosition(p.getPosition() - ladderLength);
+            p.setPosition(p.getPosition() - ladderLength + 3);
         }
         coOrds = Convert.convert(p);
         JOptionPane.showMessageDialog(null, p.getName() + " is on square " + coOrds[0] + "" + coOrds[1]);

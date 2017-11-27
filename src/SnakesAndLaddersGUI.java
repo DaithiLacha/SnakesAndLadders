@@ -168,7 +168,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
 //                panelHolder[xCo][yCo].remove(bluePiece);
 //                repaint();
 //                validate();
-//                player.rollDice();
+                player.rollDice();
                 DetermineSquareType.determineSquareType(player);
 
                 if(player.getPosition() < 10) {
