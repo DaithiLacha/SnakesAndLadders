@@ -156,17 +156,28 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                 JOptionPane.showMessageDialog(null, "You must add a player before they can roll the dice");
             }else{
                 Player player = players.get(counter);
-                String pos = "" + player.getPosition() + "";
-                int xCo = Integer.parseInt(pos.substring(0,1));
-                int yCo = Integer.parseInt(pos.substring(1,2));
-                panelHolder[xCo][yCo].remove(bluePiece);
-                repaint();
-                validate();
-                player.rollDice();
+                int xCo, yCo;
+                String pos;
+//                if(player.getPosition() < 10) {
+//                    xCo = 0;
+//                    yCo = player.getPosition();
+//                }else {
+//                    xCo = (player.getPosition() / 10);
+//                    yCo = (player.getPosition() % 10);
+//                }
+//                panelHolder[xCo][yCo].remove(bluePiece);
+//                repaint();
+//                validate();
+//                player.rollDice();
                 DetermineSquareType.determineSquareType(player);
-                pos = "" + player.getPosition() + "";
-                xCo = Integer.parseInt(pos.substring(0,1));
-                yCo = Integer.parseInt(pos.substring(1,2));
+
+                if(player.getPosition() < 10) {
+                    xCo = 0;
+                    yCo = player.getPosition();
+                }else {
+                    xCo = (player.getPosition() / 10);
+                    yCo = (player.getPosition() % 10);
+                }
                 panelHolder[xCo][yCo].add(bluePiece);
                 repaint();
                 validate();

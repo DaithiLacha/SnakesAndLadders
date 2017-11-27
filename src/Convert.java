@@ -100,7 +100,7 @@ public class Convert {
         }else {
             coOrds[0] = 0;
             coOrds[1] = (9 - (coOrds[1]%10));
-            num = coOrds[0] + "" + coOrds[1];
+            num = "" + coOrds[0] + "" + coOrds[1];
             number = Integer.parseInt(num);
             return number;
         }

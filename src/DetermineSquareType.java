@@ -20,7 +20,7 @@ public class DetermineSquareType {
     public static void snake(Player p) {
         int xCo, yCo;
         int[] coOrds = Convert.convert(p);
-        int snakeLength = (int)((Math.random() * 7) + 8);
+        int snakeLength = (int)((Math.random() * 6) + 7);
         if(snakeLength >= 10) {
             xCo = 1;
             yCo = (snakeLength % 10);
@@ -50,7 +50,7 @@ public class DetermineSquareType {
     public static void ladder(Player p) {
         int  yCo;
         int[] coOrds = Convert.convert(p);
-        int ladderLength = ((int)(Math.random() * 7) + 8);
+        int ladderLength = 7;
         if(ladderLength >= 10) {
             yCo = (ladderLength % 10);
             if((coOrds[1] + yCo) > 9) {
@@ -70,13 +70,18 @@ public class DetermineSquareType {
             }
         }
         JOptionPane.showMessageDialog(null, "You landed on a ladder advance " + ladderLength + " spaces");
-        p.setPosition(p.getPosition() + ladderLength);
+        if(ladderLength > 9) {
+            p.setPosition(p.getPosition() - (ladderLength + 3));
+        }else {
+            p.setPosition(p.getPosition() - ladderLength);
+        }
         coOrds = Convert.convert(p);
         JOptionPane.showMessageDialog(null, p.getName() + " is on square " + coOrds[0] + "" + coOrds[1]);
     }
 
     public static void main(String[] args) {
         Player testPlayer = new Player();
-        ladder(testPlayer);
+        testPlayer.setPosition(74);
+        snake(testPlayer);
     }
 }
