@@ -21,13 +21,14 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         ImageIcon snake = new ImageIcon("images/Snake.png");
         ImageIcon ladder = new ImageIcon("images/Ladder.png");
         setTitle("Snakes and Ladders");
-        setSize(1500, 850);
+        setSize(1500, 1000);
         Container pane = getContentPane();
+        pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
         JPanel boardPanel = new JPanel();
         JPanel boardPanel2 = new JPanel();
+        pane.add(boardPanel);
+        pane.add(boardPanel2);
         boardPanel2.setLayout(new FlowLayout());
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, boardPanel2);
-        pane.add(splitPane);
         GridLayout boardLayout = new GridLayout(10, 10);
         boardPanel.setLayout(boardLayout);
 
