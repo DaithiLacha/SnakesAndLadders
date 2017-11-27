@@ -5,18 +5,17 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
-    JMenu fileMenu, playerMenu;
+    private JMenu fileMenu;
+    private JMenu playerMenu;
     static ArrayList<Player> players;
-    JPanel boardPanel, boardPanel2;
-    GridLayout boardLayout;
-    JPanel[][] panelHolder = new JPanel[10][10];
+    private JPanel[][] panelHolder = new JPanel[10][10];
     static int count = 0;
-    JButton player1Roll ,player2Roll, player3Roll, player4Roll;
     static ImageIcon blue = new ImageIcon("images/bluePiece.png");
     static ImageIcon red = new ImageIcon("images/redPiece.png");
-    static ImageIcon green = new ImageIcon("images/greenPiece.png");
-    static ImageIcon yellow = new ImageIcon("images/yellowPiece.png");
-    private static int counter = 0;
+//    static ImageIcon green = new ImageIcon("images/greenPiece.png");
+//    static ImageIcon yellow = new ImageIcon("images/yellowPiece.png");
+    private static int counter;
+
     public static void main(String[] args) {
         SnakesAndLaddersGUI frame = new SnakesAndLaddersGUI();
         frame.setVisible(true);
@@ -29,13 +28,12 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         setTitle("Snakes and Ladders");
         setSize(1500, 850);
         Container pane = getContentPane();
-        boardPanel = new JPanel();
-        boardPanel.setLayout(null);
-        boardPanel2 = new JPanel();
+        JPanel boardPanel = new JPanel();
+        JPanel boardPanel2 = new JPanel();
         boardPanel2.setLayout(new FlowLayout());
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, boardPanel, boardPanel2);
         pane.add(splitPane);
-        boardLayout = new GridLayout(10, 10);
+        GridLayout boardLayout = new GridLayout(10, 10);
         boardPanel.setLayout(boardLayout);
 
         for (int i = 0; i < 10; i++) {
@@ -70,18 +68,25 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                     panelHolder[i][j].add(new JLabel(snake));
                 } else {
                     if(((i % 2) == 0)) {
+                        JPanel panel = new JPanel();
+                        panel.setLayout(new BorderLayout());
+                        panelHolder[i][j] = panel;
+                        boardPanel.add(panelHolder[i][j]);
                         JLabel label = new JLabel("Square " + (9 - i) + "" + (9 - j));
                         label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                        boardPanel.add(label);
+                        panelHolder[i][j].add(label);
                     }else {
+                        JPanel panel = new JPanel();
+                        panel.setLayout(new BorderLayout());
+                        panelHolder[i][j] = panel;
+                        boardPanel.add(panelHolder[i][j]);
                         JLabel label = new JLabel("Square " + (9 - i) + "" + (j));
                         label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-                        boardPanel.add(label);
+                        panelHolder[i][j].add(label);
                     }
                 }
             }
         }
-        //panelHolder[2][4].add(new JLabel(blue));
         JButton button1 = new JButton("Roll Dice");
         button1.setBounds(20,250, 100, 62);
         boardPanel2.add(button1);
@@ -129,11 +134,6 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         players.add(new Player(name));
         ColourGUI frame = new ColourGUI();
         frame.setVisible(true);
-//        if(count == 0) {
-//            player1Roll = new JButton("Player 1 Roll");
-//            boardPanel.add(player1Roll);
-//            player1Roll.addActionListener(this);
-//        }
     }
 
     public void displayPlayers() {
@@ -151,19 +151,45 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Roll Dice")) {
+            JLabel bluePiece = new JLabel(blue);
             if(players.size() == 0) {
                 JOptionPane.showMessageDialog(null, "You must add a player before they can roll the dice");
             }else{
-                players.get(counter).rollDice();
+                Player player = players.get(counter);
+                String pos = "" + player.getPosition() + "";
+                int xCo = Integer.parseInt(pos.substring(0,1));
+                int yCo = Integer.parseInt(pos.substring(1,2));
+                panelHolder[xCo][yCo].remove(bluePiece);
+                repaint();
+                validate();
+                player.rollDice();
+                DetermineSquareType.determineSquareType(player);
+                pos = "" + player.getPosition() + "";
+                xCo = Integer.parseInt(pos.substring(0,1));
+                yCo = Integer.parseInt(pos.substring(1,2));
+                panelHolder[xCo][yCo].add(bluePiece);
+                repaint();
+                validate();
+                    if(player.isWinner()) {
+                        JOptionPane.showMessageDialog(null, "Congrats " + player.getName() + " you win");
+                    }
+                    counter++;
+                    if(counter >= players.size()){
+                        counter = 0;
+                    }
+
             }
         }else if(e.getActionCommand().equals("Add")) {
-            addPlayer();
+            if(players.size() < 4) {
+                addPlayer();
+            }else {
+                JOptionPane.showMessageDialog(null, "Four players is the maximum allowed");
+            }
         }else if(e.getActionCommand().equals("Display")) {
             displayPlayers();
         }else if(e.getActionCommand().equals("New")) {
             newGame();
         }
-
     }
 }
 

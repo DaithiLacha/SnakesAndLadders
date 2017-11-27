@@ -3,7 +3,7 @@ import javax.swing.*;
 public class Player extends Person {
     private int position;
     private Token token;
-    protected static boolean winner = false;
+    protected boolean winner;
 
     public Player() {
        this("Unknown");
@@ -11,7 +11,9 @@ public class Player extends Person {
 
     public Player(String name) {
         super(name);
+        setToken(new Token());
         setPosition(90);
+        setWinner(false);
     }
 
     public int getPosition() {
@@ -30,72 +32,68 @@ public class Player extends Person {
         this.token = token;
     }
 
-    public static void setWinner(boolean winner) {
-        Player.winner = winner;
+    public void setWinner(boolean winner) {
+        this.winner = winner;
+    }
+
+    public boolean isWinner() {
+        return winner;
     }
 
     public void rollDice() {
         int roll = (int)((Math.random() * 6) + 1);
-        if(getPosition() >= 90) {
-            setPosition(getPosition() + roll);
-            if (getPosition() > 99) {
-                setPosition(90 - (getPosition() - 99));
+        JOptionPane.showMessageDialog(null, "You rolled a " + roll);
+        if(position >= 90) {
+            position = (position + roll);
+            if (position > 99) {
+                position = (90 - (position - 99));
             }
-        }
-        if(getPosition() >= 80) {
-            setPosition(getPosition() - roll);
-            if (getPosition() < 80) {
-                setPosition(70 + (80 - getPosition()));
+        }else if(position >= 80) {
+            position = (position - roll);
+            if (position < 80) {
+                position = (70 + (79 - position));
             }
-        }
-        if(getPosition() >= 70) {
-            setPosition(getPosition() + roll);
-            if (getPosition() > 79) {
-                setPosition(70 - (getPosition() - 79));
+        }else if(position >= 70) {
+            position = (position + roll);
+            if (position > 79) {
+                position = (70 - (position - 79));
             }
-        }
-        if(getPosition() >= 60) {
-            setPosition(getPosition() - roll);
-            if (getPosition() < 60) {
-                setPosition(50 + (60 - getPosition()));
+        }else if(position >= 60) {
+            position = (position - roll);
+            if (position < 60) {
+                position = (50 + (59 - position));
             }
-        }
-        if(getPosition() >= 50) {
-            setPosition(getPosition() + roll);
-            if (getPosition() > 59) {
-                setPosition(50 - (getPosition() - 59));
+        }else if(position >= 50) {
+            position = (position + roll);
+            if (position > 59) {
+                position = (50 - (position - 59));
             }
-        }
-        if(getPosition() >= 40) {
-            setPosition(getPosition() - roll);
-            if (getPosition() < 40) {
-                setPosition(30 + (40 - getPosition()));
+        }else if(position >= 40) {
+            position = (position - roll);
+            if (position < 40) {
+                position = (30 + (39 - position));
             }
-        }
-        if(getPosition() >= 30) {
-            setPosition(getPosition() + roll);
-            if (getPosition() > 39) {
-                setPosition(30 - (getPosition() - 39));
+        }else if(position >= 30) {
+            position = (position + roll);
+            if (position > 39) {
+                position = (30 - (position - 39));
             }
-        }
-        if(getPosition() >= 20) {
-            setPosition(getPosition() - roll);
-            if (getPosition() < 20) {
-                setPosition(10 + (20 - getPosition()));
+        }else if(position >= 20) {
+            position = (position - roll);
+            if (position < 20) {
+                position = (10 + (19 - position));
             }
-        }
-        if(getPosition() >= 10) {
-            setPosition(getPosition() + roll);
-            if (getPosition() > 19) {
-                setPosition(10 - (getPosition() - 19));
+        }else if(position >= 10) {
+            position = (position + roll);
+            if (position > 19) {
+                position = (10 - (position - 19));
             }
-        }
-        if(getPosition() >= 0) {
-            if ((getPosition() - roll) < 0) {
+        }else if(position >= 0) {
+            if ((position - roll) < 0) {
                 JOptionPane.showMessageDialog(null, "You must get the correct roll to finish");
             }else {
-                setPosition(getPosition() - roll);
-                if(getPosition() == 0) {
+                position = (position - roll);
+                if(position == 0) {
                     setWinner(true);
                 }
             }
@@ -104,6 +102,6 @@ public class Player extends Person {
 
     @Override
     public String toString() {
-        return super.toString() +"\nPosition: " + getPosition() + "\nToken: " + getToken().toString() + "\n\n";
+        return "Name: " + getName() +"\nPosition: " + getPosition() + getToken().toString() + "\n\n";
     }
 }
