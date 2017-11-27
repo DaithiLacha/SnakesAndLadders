@@ -42,14 +42,15 @@ public class ColourGUI extends JFrame implements ActionListener {
             SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Red"));
             SnakesAndLaddersGUI.count++;
             setVisible(false);
-        }else if(e.getActionCommand().equals("Yellow")) {
-            SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Yellow"));
-            SnakesAndLaddersGUI.count++;
-            setVisible(false);
-        }else if(e.getActionCommand().equals("Green")) {
-            SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Green"));
-            SnakesAndLaddersGUI.count++;
-            setVisible(false);
         }
+//        else if(e.getActionCommand().equals("Yellow")) {
+//            SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Yellow"));
+//            SnakesAndLaddersGUI.count++;
+//            setVisible(false);
+//        }else if(e.getActionCommand().equals("Green")) {
+//            SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Green"));
+//            SnakesAndLaddersGUI.count++;
+//            setVisible(false);
+//        }
     }
 }

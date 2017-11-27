@@ -14,12 +14,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
     static ImageIcon red = new ImageIcon("images/redPiece.png");
 //    static ImageIcon green = new ImageIcon("images/greenPiece.png");
 //    static ImageIcon yellow = new ImageIcon("images/yellowPiece.png");
-    private static int counter;
-
-    public static void main(String[] args) {
-        SnakesAndLaddersGUI frame = new SnakesAndLaddersGUI();
-        frame.setVisible(true);
-    }
+    private int counter;
 
     public SnakesAndLaddersGUI() {
         newGame();
@@ -152,25 +147,12 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Roll Dice")) {
             JLabel bluePiece = new JLabel(blue);
+            JLabel redPiece = new JLabel(red);
             if(players.size() == 0) {
                 JOptionPane.showMessageDialog(null, "You must add a player before they can roll the dice");
             }else{
                 Player player = players.get(counter);
                 int xCo, yCo;
-                String pos;
-//                if(player.getPosition() < 10) {
-//                    xCo = 0;
-//                    yCo = player.getPosition();
-//                }else {
-//                    xCo = (player.getPosition() / 10);
-//                    yCo = (player.getPosition() % 10);
-//                }
-//                panelHolder[xCo][yCo].remove(bluePiece);
-//                repaint();
-//                validate();
-                player.rollDice();
-                DetermineSquareType.determineSquareType(player);
-
                 if(player.getPosition() < 10) {
                     xCo = 0;
                     yCo = player.getPosition();
@@ -178,7 +160,28 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                     xCo = (player.getPosition() / 10);
                     yCo = (player.getPosition() % 10);
                 }
-                panelHolder[xCo][yCo].add(bluePiece);
+                if(player.getToken().getColour().equals("Blue")) {
+                    panelHolder[xCo][yCo].remove(bluePiece);
+                }else if(player.getToken().getColour().equals("Red")) {
+                    panelHolder[xCo][yCo].remove(redPiece);
+                }
+                repaint();
+                validate();
+
+                player.rollDice();
+                DetermineSquareType.determineSquareType(player);
+                if(player.getPosition() < 10) {
+                    xCo = 0;
+                    yCo = player.getPosition();
+                }else {
+                    xCo = (player.getPosition() / 10);
+                    yCo = (player.getPosition() % 10);
+                }
+                if(player.getToken().getColour().equals("Blue")) {
+                    panelHolder[xCo][yCo].add(bluePiece);
+                }else if(player.getToken().getColour().equals("Red")) {
+                    panelHolder[xCo][yCo].add(redPiece);
+                }
                 repaint();
                 validate();
                     if(player.isWinner()) {
