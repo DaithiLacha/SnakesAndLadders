@@ -42,66 +42,31 @@ public class Player extends Person {
 
     public void rollDice() {
         int roll = (int)((Math.random() * 6) + 1);
-        JOptionPane.showMessageDialog(null, "You rolled a " + roll);
-        if(position >= 90) {
-            position = (position + roll);
-            if (position > 99) {
-                position = (90 - (position - 99));
-            }
-        }else if(position >= 80) {
-            position = (position - roll);
-            if (position < 80) {
-                position = (70 + (79 - position));
-            }
-        }else if(position >= 70) {
-            position = (position + roll);
-            if (position > 79) {
-                position = (70 - (position - 79));
-            }
-        }else if(position >= 60) {
-            position = (position - roll);
-            if (position < 60) {
-                position = (50 + (59 - position));
-            }
-        }else if(position >= 50) {
-            position = (position + roll);
-            if (position > 59) {
-                position = (50 - (position - 59));
-            }
-        }else if(position >= 40) {
-            position = (position - roll);
-            if (position < 40) {
-                position = (30 + (39 - position));
-            }
-        }else if(position >= 30) {
-            position = (position + roll);
-            if (position > 39) {
-                position = (30 - (position - 39));
-            }
-        }else if(position >= 20) {
-            position = (position - roll);
-            if (position < 20) {
-                position = (10 + (19 - position));
-            }
-        }else if(position >= 10) {
-            position = (position + roll);
-            if (position > 19) {
-                position = (10 - (position - 19));
-            }
-        }else if(position >= 0) {
+        JOptionPane.showMessageDialog(null, getName() + " rolled a " + roll);
+        if(position >= 0 && position < 6) {
             if ((position - roll) < 0) {
                 JOptionPane.showMessageDialog(null, "You must get the correct roll to finish");
-            }else {
+            } else {
                 position = (position - roll);
-                if(position == 0) {
+                if (position == 0) {
                     setWinner(true);
                 }
+            }
+        }else if ((position % 20) > 9) {
+            position = (position + roll);
+            if ((position % 20) < 10) {
+                position = ((position - (10 + (position % 10))) - (position - (position - ((position % 10) + 1))));
+            }
+        }else if ((position % 20) < 10) {
+            position = (position - roll);
+            if ((position % 20) > 9) {
+                position = ((position - (position % 10)) + ((position - (position % 10) + 9) - (position)));
             }
         }
     }
 
     @Override
     public String toString() {
-        return "Name: " + getName() +"\nPosition: " + getPosition() + getToken().toString() + "\n\n";
+        return "Name: " + getName() +"\nPosition: " + getPosition() + "\n" +getToken().toString() + "\n\n";
     }
 }

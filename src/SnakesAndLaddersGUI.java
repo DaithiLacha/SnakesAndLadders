@@ -14,6 +14,8 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
     static ImageIcon red = new ImageIcon("images/redPiece.png");
 //    static ImageIcon green = new ImageIcon("images/greenPiece.png");
 //    static ImageIcon yellow = new ImageIcon("images/yellowPiece.png");
+    JLabel currentBluePiece;
+    JLabel currentRedPiece;
     private int counter;
 
     public SnakesAndLaddersGUI() {
@@ -21,7 +23,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         ImageIcon snake = new ImageIcon("images/Snake.png");
         ImageIcon ladder = new ImageIcon("images/Ladder.png");
         setTitle("Snakes and Ladders");
-        setSize(1500, 1000);
+        setSize(750, 500);
         Container pane = getContentPane();
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
         JPanel boardPanel = new JPanel();
@@ -32,39 +34,44 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         GridLayout boardLayout = new GridLayout(10, 10);
         boardPanel.setLayout(boardLayout);
 
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                if ((i != 0) && (i % 2 == 0) && (j == 2)) {
+        for(int i = 0; i < 10; i++) {
+            for(int j = 0; j < 10; j++) {
+                if((i != 0) && (i % 2 == 0) && (j == 2)) {
                     JPanel panel = new JPanel();
+                    panel.setPreferredSize(new Dimension(50,50));
                     panel.setLayout(new BorderLayout());
                     panelHolder[i][j] = panel;
                     boardPanel.add(panelHolder[i][j]);
                     panelHolder[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                     panelHolder[i][j].add(new JLabel(ladder));
-                } else if ((i % 2 != 0) && (j == 6)) {
+                }else if((i % 2 != 0) && (j == 6)) {
                     JPanel panel = new JPanel();
+                    panel.setPreferredSize(new Dimension(50,50));
                     panel.setLayout(new BorderLayout());
                     panelHolder[i][j] = panel;
                     boardPanel.add(panelHolder[i][j]);
                     panelHolder[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                     panelHolder[i][j].add(new JLabel(ladder));
-                } else if ((i % 2 == 0) && (j == 4)) {
+                }else if((i % 2 == 0) && (j == 4)) {
                     JPanel panel = new JPanel();
+                    panel.setPreferredSize(new Dimension(50,50));
                     panel.setLayout(new BorderLayout());
                     panelHolder[i][j] = panel;
                     boardPanel.add(panelHolder[i][j]);
                     panelHolder[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                     panelHolder[i][j].add(new JLabel(snake));
-                } else if (i < 9 && (i % 2 != 0) && (j == 9)) {
+                }else if (i < 9 && (i % 2 != 0) && (j == 9)) {
                     JPanel panel = new JPanel();
+                    panel.setPreferredSize(new Dimension(50,50));
                     panel.setLayout(new BorderLayout());
                     panelHolder[i][j] = panel;
                     boardPanel.add(panelHolder[i][j]);
                     panelHolder[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                     panelHolder[i][j].add(new JLabel(snake));
-                } else {
+                }else {
                     if(((i % 2) == 0)) {
                         JPanel panel = new JPanel();
+                        panel.setPreferredSize(new Dimension(50,50));
                         panel.setLayout(new BorderLayout());
                         panelHolder[i][j] = panel;
                         boardPanel.add(panelHolder[i][j]);
@@ -73,6 +80,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                         panelHolder[i][j].add(label);
                     }else {
                         JPanel panel = new JPanel();
+                        panel.setPreferredSize(new Dimension(50,50));
                         panel.setLayout(new BorderLayout());
                         panelHolder[i][j] = panel;
                         boardPanel.add(panelHolder[i][j]);
@@ -147,8 +155,6 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Roll Dice")) {
-            JLabel bluePiece = new JLabel(blue);
-            JLabel redPiece = new JLabel(red);
             if(players.size() == 0) {
                 JOptionPane.showMessageDialog(null, "You must add a player before they can roll the dice");
             }else{
@@ -161,15 +167,20 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                     xCo = (player.getPosition() / 10);
                     yCo = (player.getPosition() % 10);
                 }
-                if(player.getToken().getColour().equals("Blue")) {
-                    panelHolder[xCo][yCo].remove(bluePiece);
-                }else if(player.getToken().getColour().equals("Red")) {
-                    panelHolder[xCo][yCo].remove(redPiece);
+                if(panelHolder[xCo][yCo].getComponents().length>1) {
+                    panelHolder[xCo][yCo].remove(panelHolder[xCo][yCo].getComponents()[1]);
                 }
                 repaint();
                 validate();
 
                 player.rollDice();
+
+                JLabel bluePiece = new JLabel(blue);
+                JLabel redPiece = new JLabel(red);
+
+                currentBluePiece = bluePiece;
+                currentRedPiece = redPiece;
+
                 DetermineSquareType.determineSquareType(player);
                 if(player.getPosition() < 10) {
                     xCo = 0;
@@ -187,6 +198,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                 validate();
                     if(player.isWinner()) {
                         JOptionPane.showMessageDialog(null, "Congrats " + player.getName() + " you win");
+
                     }
                     counter++;
                     if(counter >= players.size()){

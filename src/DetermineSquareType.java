@@ -49,7 +49,6 @@ public class DetermineSquareType {
 
     public static void ladder(Player p) {
         int  yCo;
-        int[] firstCoOrds = Convert.convert(p);
         int[] coOrds = Convert.convert(p);
         int ladderLength = (int)((Math.random() * 7) + 7);
         if(ladderLength >= 10) {
@@ -71,14 +70,7 @@ public class DetermineSquareType {
             }
         }
         JOptionPane.showMessageDialog(null, "You landed on a ladder advance " + ladderLength + " spaces");
-        if(firstCoOrds[1] == 6){
-            p.setPosition(p.getPosition() - (ladderLength + 3));
-        }else {
-            p.setPosition(p.getPosition() - (15 - ladderLength));
-            if(ladderLength == 13 ) {
-                p.setPosition(p.getPosition() - 11);
-            }
-        }
+        p.setPosition(Convert.convertSquareNumtoPosition(coOrds));
         coOrds = Convert.convert(p);
         JOptionPane.showMessageDialog(null, p.getName() + " is on square " + coOrds[0] + "" + coOrds[1]);
     }
