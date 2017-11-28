@@ -189,17 +189,18 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                         JOptionPane.showMessageDialog(null, "Congrats " + player.getName() + " you win");
                         for(Player p : players) {
                             coOrds = Convert.getCoOrds(p);
-                            if(player.getToken().getColour().equals("Blue")) {
-                                panelHolder[coOrds[0]][coOrds[1]].remove(bluePiece);
+                            String winningColour = player.getToken().getColour();
+                            if(p.getToken().getColour().equals(winningColour)) {
+                                panelHolder[coOrds[0]][coOrds[1]].remove(panelHolder[coOrds[0]][coOrds[1]].getComponents()[1]);
                                 repaint();
                                 validate();
-                            }else if(player.getToken().getColour().equals("Red")) {
-                                panelHolder[coOrds[0]][coOrds[1]].remove(redPiece);
+                            }else if(!(p.getToken().getColour().equals(winningColour))) {
+                                panelHolder[coOrds[0]][coOrds[1]].remove(panelHolder[coOrds[0]][coOrds[1]].getComponents()[1]);
                                 repaint();
                                 validate();
                             }
-                            newGame();
                         }
+                        newGame();
                     }
                     counter++;
                     if(counter >= players.size()){

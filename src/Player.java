@@ -43,7 +43,7 @@ public class Player extends Person {
     public void rollDice() {
         int roll = (int)((Math.random() * 6) + 1);
         JOptionPane.showMessageDialog(null, getName() + " rolled a " + roll);
-        if(position >= 0 && position < 6) {
+        if(position >= 0 && position < 7) {
             if ((position - roll) < 0) {
                 JOptionPane.showMessageDialog(null, "You must get the correct roll to finish");
             } else {

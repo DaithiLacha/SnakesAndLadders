@@ -5,12 +5,16 @@ public class DetermineSquareType {
         int[] pos = Convert.convert(p);
         if((pos[0] != 0) && (pos[0] % 2 == 0) && (pos[1] == 9)) {
             snake(p);
+            determineSquareType(p);
         }else if((pos[0] % 2 != 0) && (pos[1] == 5)) {
             snake(p);
+            determineSquareType(p);
         }else if((pos[0] % 2 == 0) && (pos[1] == 6)) {
             ladder(p);
+            determineSquareType(p);
         }else if((pos[0] < 9) && (pos[0] % 2 != 0) && (pos[1] == 7)) {
             ladder(p);
+            determineSquareType(p);
         }else {
             int[] coOrds = Convert.convert(p);
             JOptionPane.showMessageDialog(null, p.getName() + " is on square " + coOrds[0] + "" + coOrds[1]);
