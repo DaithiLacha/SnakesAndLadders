@@ -62,7 +62,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                     boardPanel.add(panelHolder[i][j]);
                     panelHolder[i][j].setBorder(BorderFactory.createLineBorder(Color.BLACK));
                     panelHolder[i][j].add(new JLabel(snake));
-                }else if (i < 9 && (i % 2 != 0) && (j == 9)) {
+                }else if(i < 9 && (i % 2 != 0) && (j == 9)) {
                     JPanel panel = new JPanel();
                     panel.setPreferredSize(new Dimension(50,50));
                     panel.setLayout(new BorderLayout());
@@ -159,13 +159,15 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         if(e.getActionCommand().equals("Roll Dice")) {
             if(players.size() == 0) {
                 JOptionPane.showMessageDialog(null, "You must add a player before they can roll the dice");
-            }else{
+            }else {
                 int[] coOrds;
                 Player player = players.get(counter);
                 coOrds = Convert.getCoOrds(player);
+
                 if(panelHolder[coOrds[0]][coOrds[1]].getComponents().length>1) {
                     panelHolder[coOrds[0]][coOrds[1]].remove(panelHolder[coOrds[0]][coOrds[1]].getComponents()[1]);
                 }
+
                 repaint();
                 validate();
 
@@ -184,6 +186,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                 DetermineSquareType.determineSquareType(player);
 
                 coOrds = Convert.getCoOrds(player);
+
                 if(player.getToken().getColour().equals("Blue")) {
                     panelHolder[coOrds[0]][coOrds[1]].add(bluePiece);
                 }else if(player.getToken().getColour().equals("Red")) {
@@ -193,8 +196,10 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                 }else if(player.getToken().getColour().equals("Yellow")) {
                     panelHolder[coOrds[0]][coOrds[1]].add(yellowPiece);
                 }
+
                 repaint();
                 validate();
+
                 if(player.isWinner()) {
                     JOptionPane.showMessageDialog(null, "Congrats " + player.getName() + " you win");
                     for(Player p : players) {
@@ -212,7 +217,9 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                     }
                     newGame();
                 }
+
                 counter++;
+
                 if(counter >= players.size()){
                     counter = 0;
                 }
@@ -248,6 +255,8 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
+        }else if(e.getActionCommand().equals("Quit")) {
+            System.exit(0);
         }
     }
 }

@@ -47,8 +47,6 @@ public class DetermineSquareType {
         }
         JOptionPane.showMessageDialog(null, "You landed on a snake go back " + snakeLength + " spaces");
         p.setPosition(Convert.convertSquareNumToPosition(coOrds));
-        coOrds = Convert.convert(p);
-        JOptionPane.showMessageDialog(null, p.getName() + " is on square " + coOrds[0] + "" + coOrds[1]);
     }
 
     public static void ladder(Player p) {
@@ -75,7 +73,5 @@ public class DetermineSquareType {
         }
         JOptionPane.showMessageDialog(null, "You landed on a ladder advance " + ladderLength + " spaces");
         p.setPosition(Convert.convertSquareNumToPosition(coOrds));
-        coOrds = Convert.convert(p);
-        JOptionPane.showMessageDialog(null, p.getName() + " is on square " + coOrds[0] + "" + coOrds[1]);
     }
 }

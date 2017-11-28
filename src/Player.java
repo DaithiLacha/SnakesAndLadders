@@ -3,9 +3,8 @@ import java.io.Serializable;
 
 public class Player extends Person implements Serializable {
     private int position;
-    private int wins = 0;
     private Token token;
-    protected boolean winner;
+    private boolean winner;
 
     public Player() {
        this("Unknown");
@@ -52,7 +51,6 @@ public class Player extends Person implements Serializable {
                 setPosition(getPosition() - roll);
                 if (getPosition() == 0) {
                     setWinner(true);
-
                 }
             }
         }else if((getPosition() % 20) > 9) {

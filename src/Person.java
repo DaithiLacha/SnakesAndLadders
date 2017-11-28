@@ -1,5 +1,5 @@
 public abstract class Person implements PlayerActions {
-    protected String name;
+    private String name;
 
     public Person() {
         this("Unknown");
