@@ -12,10 +12,12 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
     static int count = 0;
     static ImageIcon blue = new ImageIcon("images/bluePiece.png");
     static ImageIcon red = new ImageIcon("images/redPiece.png");
-//    static ImageIcon green = new ImageIcon("images/greenPiece.png");
-//    static ImageIcon yellow = new ImageIcon("images/yellowPiece.png");
+    static ImageIcon green = new ImageIcon("images/greenPiece.png");
+    static ImageIcon yellow = new ImageIcon("images/yellowPiece.png");
     JLabel currentBluePiece;
     JLabel currentRedPiece;
+    JLabel currentGreenPiece;
+    JLabel currentYellowPiece;
     private int counter;
 
     public SnakesAndLaddersGUI() {
@@ -171,9 +173,13 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
 
                 JLabel bluePiece = new JLabel(blue);
                 JLabel redPiece = new JLabel(red);
+                JLabel greenPiece = new JLabel(green);
+                JLabel yellowPiece = new JLabel(yellow);
 
                 currentBluePiece = bluePiece;
                 currentRedPiece = redPiece;
+                currentGreenPiece = greenPiece;
+                currentYellowPiece = yellowPiece;
 
                 DetermineSquareType.determineSquareType(player);
 
@@ -182,31 +188,34 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                     panelHolder[coOrds[0]][coOrds[1]].add(bluePiece);
                 }else if(player.getToken().getColour().equals("Red")) {
                     panelHolder[coOrds[0]][coOrds[1]].add(redPiece);
+                }else if(player.getToken().getColour().equals("Green")) {
+                    panelHolder[coOrds[0]][coOrds[1]].add(greenPiece);
+                }else if(player.getToken().getColour().equals("Yellow")) {
+                    panelHolder[coOrds[0]][coOrds[1]].add(yellowPiece);
                 }
                 repaint();
                 validate();
-                    if(player.isWinner()) {
-                        JOptionPane.showMessageDialog(null, "Congrats " + player.getName() + " you win");
-                        for(Player p : players) {
-                            coOrds = Convert.getCoOrds(p);
-                            String winningColour = player.getToken().getColour();
-                            if(p.getToken().getColour().equals(winningColour)) {
-                                panelHolder[coOrds[0]][coOrds[1]].remove(panelHolder[coOrds[0]][coOrds[1]].getComponents()[1]);
-                                repaint();
-                                validate();
-                            }else if(!(p.getToken().getColour().equals(winningColour))) {
-                                panelHolder[coOrds[0]][coOrds[1]].remove(panelHolder[coOrds[0]][coOrds[1]].getComponents()[1]);
-                                repaint();
-                                validate();
-                            }
+                if(player.isWinner()) {
+                    JOptionPane.showMessageDialog(null, "Congrats " + player.getName() + " you win");
+                    for(Player p : players) {
+                        coOrds = Convert.getCoOrds(p);
+                        String winningColour = player.getToken().getColour();
+                        if(p.getToken().getColour().equals(winningColour)) {
+                            panelHolder[coOrds[0]][coOrds[1]].remove(panelHolder[coOrds[0]][coOrds[1]].getComponents()[1]);
+                            repaint();
+                            validate();
+                        }else if(!(p.getToken().getColour().equals(winningColour))) {
+                            panelHolder[coOrds[0]][coOrds[1]].remove(panelHolder[coOrds[0]][coOrds[1]].getComponents()[1]);
+                            repaint();
+                            validate();
                         }
-                        newGame();
                     }
-                    counter++;
-                    if(counter >= players.size()){
-                        counter = 0;
-                    }
-
+                    newGame();
+                }
+                counter++;
+                if(counter >= players.size()){
+                    counter = 0;
+                }
             }
         }else if(e.getActionCommand().equals("Add")) {
             if(players.size() < 4) {
@@ -217,7 +226,28 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         }else if(e.getActionCommand().equals("Display")) {
             displayPlayers();
         }else if(e.getActionCommand().equals("New")) {
+            if(players.size() != 0) {
+                int[] coOrds;
+                for(Player p : players) {
+                    coOrds = Convert.getCoOrds(p);
+                    panelHolder[coOrds[0]][coOrds[1]].remove(panelHolder[coOrds[0]][coOrds[1]].getComponents()[1]);
+                    repaint();
+                    validate();
+                }
+            }
             newGame();
+        }else if(e.getActionCommand().equals("Save")) {
+            try {
+                InputOutput.objectOutputStream();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }else if(e.getActionCommand().equals("Open")) {
+            try {
+                InputOutput.objectInputStream();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
         }
     }
 }

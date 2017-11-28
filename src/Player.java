@@ -1,7 +1,9 @@
 import javax.swing.*;
+import java.io.Serializable;
 
-public class Player extends Person {
+public class Player extends Person implements Serializable {
     private int position;
+    private int wins = 0;
     private Token token;
     protected boolean winner;
 
@@ -43,30 +45,31 @@ public class Player extends Person {
     public void rollDice() {
         int roll = (int)((Math.random() * 6) + 1);
         JOptionPane.showMessageDialog(null, getName() + " rolled a " + roll);
-        if(position >= 0 && position < 7) {
-            if ((position - roll) < 0) {
+        if(getPosition() >= 0 && getPosition() < 7) {
+            if((getPosition() - roll) < 0) {
                 JOptionPane.showMessageDialog(null, "You must get the correct roll to finish");
             } else {
-                position = (position - roll);
-                if (position == 0) {
+                setPosition(getPosition() - roll);
+                if (getPosition() == 0) {
                     setWinner(true);
+
                 }
             }
-        }else if ((position % 20) > 9) {
-            position = (position + roll);
-            if ((position % 20) < 10) {
-                position = ((position - (10 + (position % 10))) - (position - (position - ((position % 10) + 1))));
+        }else if((getPosition() % 20) > 9) {
+            setPosition(getPosition() + roll);
+            if((getPosition() % 20) < 10) {
+                setPosition((getPosition() - (10 + (getPosition() % 10))) - (getPosition() - (getPosition() - ((getPosition() % 10) + 1))));
             }
-        }else if ((position % 20) < 10) {
-            position = (position - roll);
-            if ((position % 20) > 9) {
-                position = ((position - (position % 10)) + ((position - (position % 10) + 9) - (position)));
+        }else if((getPosition() % 20) < 10) {
+            setPosition(getPosition() - roll);
+            if((getPosition() % 20) > 9) {
+                setPosition((getPosition() - (getPosition() % 10)) + ((getPosition() - (getPosition() % 10) + 9) - (getPosition())));
             }
         }
     }
 
     @Override
     public String toString() {
-        return "Name: " + getName() +"\nPosition: " + getPosition() + "\n" +getToken().toString() + "\n\n";
+        return "Name: " + getName() +"\nPosition: " + getPosition() + "\n" + getToken().toString() + "\n\n";
     }
 }

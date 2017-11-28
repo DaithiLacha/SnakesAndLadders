@@ -17,7 +17,7 @@ public class Convert {
         return coOrds;
     }
 
-    public static int convertSquareNumtoPosition(int[] coOrds) {
+    public static int convertSquareNumToPosition(int[] coOrds) {
         String num;
         int number;
         if((coOrds[0] % 2) == 0) {

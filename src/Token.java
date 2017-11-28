@@ -1,4 +1,6 @@
-public class Token {
+import java.io.Serializable;
+
+public class Token implements Serializable {
     private String colour;
 
     public Token() {
