@@ -20,7 +20,7 @@ public class DetermineSquareType {
     public static void snake(Player p) {
         int xCo, yCo;
         int[] coOrds = Convert.convert(p);
-        int snakeLength = (int)((Math.random() * 7) + 7);
+        int snakeLength = (int)((Math.random() * 9) + 4);
         if(snakeLength >= 10) {
             xCo = 1;
             yCo = (snakeLength % 10);
@@ -50,7 +50,7 @@ public class DetermineSquareType {
     public static void ladder(Player p) {
         int  yCo;
         int[] coOrds = Convert.convert(p);
-        int ladderLength = (int)((Math.random() * 7) + 7);
+        int ladderLength = (int)((Math.random() * 9) + 4);
         if(ladderLength >= 10) {
             yCo = (ladderLength % 10);
             if((coOrds[1] + yCo) > 9) {

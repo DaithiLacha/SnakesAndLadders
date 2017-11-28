@@ -1,5 +1,3 @@
-import javax.swing.*;
-
 /*
  * Created by t00196827 on 21/11/2017.
  */
@@ -26,13 +24,28 @@ public class Convert {
             coOrds[0] = (9 - coOrds[0]);
             num = coOrds[0] + "" + coOrds[1];
             number = Integer.parseInt(num);
-            return number;
         }else {
             coOrds[0] = (9 - coOrds[0]);
             coOrds[1] = (9 - (coOrds[1]%10));
             num = coOrds[0] + "" + coOrds[1];
             number = Integer.parseInt(num);
-            return number;
         }
+        return number;
+    }
+
+    public static int[] getCoOrds(Player p) {
+        int xCo;
+        int yCo;
+        int[] coOrds = new int[2];
+        if(p.getPosition() < 10) {
+            xCo = 0;
+            yCo = p.getPosition();
+        }else {
+            xCo = (p.getPosition() / 10);
+            yCo = (p.getPosition() % 10);
+        }
+        coOrds[0] = xCo;
+        coOrds[1] = yCo;
+        return coOrds;
     }
 }

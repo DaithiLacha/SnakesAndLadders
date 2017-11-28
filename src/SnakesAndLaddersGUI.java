@@ -158,17 +158,11 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
             if(players.size() == 0) {
                 JOptionPane.showMessageDialog(null, "You must add a player before they can roll the dice");
             }else{
+                int[] coOrds;
                 Player player = players.get(counter);
-                int xCo, yCo;
-                if(player.getPosition() < 10) {
-                    xCo = 0;
-                    yCo = player.getPosition();
-                }else {
-                    xCo = (player.getPosition() / 10);
-                    yCo = (player.getPosition() % 10);
-                }
-                if(panelHolder[xCo][yCo].getComponents().length>1) {
-                    panelHolder[xCo][yCo].remove(panelHolder[xCo][yCo].getComponents()[1]);
+                coOrds = Convert.getCoOrds(player);
+                if(panelHolder[coOrds[0]][coOrds[1]].getComponents().length>1) {
+                    panelHolder[coOrds[0]][coOrds[1]].remove(panelHolder[coOrds[0]][coOrds[1]].getComponents()[1]);
                 }
                 repaint();
                 validate();
@@ -182,23 +176,30 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                 currentRedPiece = redPiece;
 
                 DetermineSquareType.determineSquareType(player);
-                if(player.getPosition() < 10) {
-                    xCo = 0;
-                    yCo = player.getPosition();
-                }else {
-                    xCo = (player.getPosition() / 10);
-                    yCo = (player.getPosition() % 10);
-                }
+
+                coOrds = Convert.getCoOrds(player);
                 if(player.getToken().getColour().equals("Blue")) {
-                    panelHolder[xCo][yCo].add(bluePiece);
+                    panelHolder[coOrds[0]][coOrds[1]].add(bluePiece);
                 }else if(player.getToken().getColour().equals("Red")) {
-                    panelHolder[xCo][yCo].add(redPiece);
+                    panelHolder[coOrds[0]][coOrds[1]].add(redPiece);
                 }
                 repaint();
                 validate();
                     if(player.isWinner()) {
                         JOptionPane.showMessageDialog(null, "Congrats " + player.getName() + " you win");
-
+                        for(Player p : players) {
+                            coOrds = Convert.getCoOrds(p);
+                            if(player.getToken().getColour().equals("Blue")) {
+                                panelHolder[coOrds[0]][coOrds[1]].remove(bluePiece);
+                                repaint();
+                                validate();
+                            }else if(player.getToken().getColour().equals("Red")) {
+                                panelHolder[coOrds[0]][coOrds[1]].remove(redPiece);
+                                repaint();
+                                validate();
+                            }
+                            newGame();
+                        }
                     }
                     counter++;
                     if(counter >= players.size()){
