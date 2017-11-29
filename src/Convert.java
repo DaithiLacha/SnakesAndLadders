@@ -1,7 +1,7 @@
-/*
- * Created by t00196827 on 21/11/2017.
- */
 public class Convert {
+    /**
+     * Method to return the square number corresponding to the player's position attribute value
+     */
     public static int[] convert(Player p) {
         int position, squareNum;
         int[] coOrds = new int[2];
@@ -17,6 +17,9 @@ public class Convert {
         return coOrds;
     }
 
+    /**
+     * Method to return the player's position attribute value corresponding to square number
+     */
     public static int convertSquareNumToPosition(int[] coOrds) {
         String num;
         int number;
@@ -33,6 +36,10 @@ public class Convert {
         return number;
     }
 
+    /**
+     * Method to return array containing the players x & y co-ordinates on the board - used for
+     * label removal
+     */
     public static int[] getCoOrds(Player p) {
         int xCo;
         int yCo;

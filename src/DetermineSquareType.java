@@ -1,16 +1,24 @@
 import javax.swing.*;
 
 public class DetermineSquareType {
+    /**
+     * Method to determine what kind of square the player has landed on and what to do afterwards
+     * depending on result
+     */
     public static void determineSquareType(Player p) {
         int[] pos = Convert.convert(p);
         if((pos[0] != 0) && (pos[0] % 2 == 0) && (pos[1] == 9)) {
+            // call the snake method
             snake(p);
+            //recall the determineSquareType method after landing on a snake
             determineSquareType(p);
         }else if((pos[0] % 2 != 0) && (pos[1] == 5)) {
             snake(p);
             determineSquareType(p);
         }else if((pos[0] % 2 == 0) && (pos[1] == 6)) {
+            // call the snake method
             ladder(p);
+            //recall the determineSquareType method after landing on a snake
             determineSquareType(p);
         }else if((pos[0] < 9) && (pos[0] % 2 != 0) && (pos[1] == 7)) {
             ladder(p);
@@ -21,6 +29,9 @@ public class DetermineSquareType {
         }
     }
 
+    /**
+     * Method to move a player backwards after landing on a snake
+     */
     public static void snake(Player p) {
         int xCo, yCo;
         int[] coOrds = Convert.convert(p);
@@ -49,6 +60,9 @@ public class DetermineSquareType {
         p.setPosition(Convert.convertSquareNumToPosition(coOrds));
     }
 
+    /**
+     * Method to move a player forward after landing on a ladder
+     */
     public static void ladder(Player p) {
         int  yCo;
         int[] coOrds = Convert.convert(p);

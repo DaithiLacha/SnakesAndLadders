@@ -8,6 +8,9 @@ public class ColourGUI extends JFrame implements ActionListener {
     private static int greenSelected;
     private static int yellowSelected;
 
+    /**
+     * Constructor for the game piece selection GUI
+     */
     public ColourGUI() {
         setTitle("Select your piece");
         setSize(240, 350);
@@ -41,6 +44,9 @@ public class ColourGUI extends JFrame implements ActionListener {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
+    /**
+     * Setting what is to happen following the occurrence of the events being listened for
+     */
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Blue")) {
             if(blueSelected == 1) {

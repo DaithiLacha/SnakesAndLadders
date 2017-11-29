@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 
 public class InputOutput {
+    /**
+     * Method to write the arraylist of players to a file
+     */
     public static void objectOutputStream() throws Exception {
         File outFile = new File("objects.data");
         FileOutputStream outFileStream = new FileOutputStream(outFile);
@@ -14,6 +17,9 @@ public class InputOutput {
         os.close();
     }
 
+    /**
+     * Method to read the arraylist of players from a file
+     */
     public static void objectInputStream() throws Exception {
         File inFile = new File("objects.data");
         FileInputStream inFileStream = new FileInputStream(inFile);
