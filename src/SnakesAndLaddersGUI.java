@@ -5,27 +5,51 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
+    /**
+     * JMenus, fileMenu for the new/save/open/quit functionality & playerMenu to add players and display player details
+     */
     private JMenu fileMenu;
     private JMenu playerMenu;
+    /**
+     * Players which will take part in the game
+     */
     static ArrayList<Player> players;
+    /**
+     * 2D array which will be used to populate the board with its individual labels
+     */
     private JPanel[][] panelHolder = new JPanel[10][10];
     static int count = 0;
+    /**
+     * Images for the player tokens
+     */
     static ImageIcon blue = new ImageIcon("images/bluePiece.png");
     static ImageIcon red = new ImageIcon("images/redPiece.png");
     static ImageIcon green = new ImageIcon("images/greenPiece.png");
     static ImageIcon yellow = new ImageIcon("images/yellowPiece.png");
+    /**
+     * JLabels to hold the token image at the players previous location so it can then be removed
+     */
     JLabel currentBluePiece;
     JLabel currentRedPiece;
     JLabel currentGreenPiece;
     JLabel currentYellowPiece;
     private int counter;
 
+    /**
+     * Constructor for the GUI which will include the game board as well as the roll dice button
+     */
     public SnakesAndLaddersGUI() {
         newGame();
         ImageIcon snake = new ImageIcon("images/Snake.png");
         ImageIcon ladder = new ImageIcon("images/Ladder.png");
         setTitle("Snakes and Ladders");
-        setSize(750, 500);
+        setSize(950, 700);
+        createFileMenu();
+        createPlayerMenu();
+        JMenuBar menuBar = new JMenuBar();
+        setJMenuBar(menuBar);
+        menuBar.add(fileMenu);
+        menuBar.add(playerMenu);
         Container pane = getContentPane();
         pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
         JPanel boardPanel = new JPanel();
@@ -98,14 +122,11 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         boardPanel2.add(button1);
         button1.addActionListener(this);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        createFileMenu();
-        createPlayerMenu();
-        JMenuBar menuBar = new JMenuBar();
-        setJMenuBar(menuBar);
-        menuBar.add(fileMenu);
-        menuBar.add(playerMenu);
     }
 
+    /**
+     * Creating and populating the fileMenu while also adding action listeners
+     */
     private void createFileMenu(){
         fileMenu = new JMenu("File");
         JMenuItem item;
@@ -124,6 +145,9 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         fileMenu.add(item);
     }
 
+    /**
+     * Creating and populating the playerMenu while also adding action listeners
+     */
     private void createPlayerMenu(){
         playerMenu = new JMenu("Player");
         JMenuItem item;
@@ -135,6 +159,9 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         playerMenu.add(item);
     }
 
+    /**
+     * Adding a player to the game
+     */
     public void addPlayer() {
         String name = JOptionPane.showInputDialog("Enter Name");
         players.add(new Player(name));
@@ -142,6 +169,9 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         frame.setVisible(true);
     }
 
+    /**
+     * Displaying player details
+     */
     public void displayPlayers() {
         String playerDetails = "";
         for(Player p : players) {
@@ -150,11 +180,18 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         JOptionPane.showMessageDialog(null, playerDetails);
     }
 
+    /**
+     * Starting a new game
+     */
     public void newGame(){
         players = new ArrayList<>();
         count = 0;
+        JOptionPane.showMessageDialog(null, "New Game started feel free to add a few players");
     }
 
+    /**
+     * Creating the functionality for each of the action listeners created
+     */
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Roll Dice")) {
             if(players.size() == 0) {
@@ -202,6 +239,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
 
                 if(player.isWinner()) {
                     JOptionPane.showMessageDialog(null, "Congrats " + player.getName() + " you win");
+                    player.setWins(player.getWins() + 1);
                     for(Player p : players) {
                         coOrds = Convert.getCoOrds(p);
                         String winningColour = player.getToken().getColour();
@@ -209,13 +247,15 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
                             panelHolder[coOrds[0]][coOrds[1]].remove(panelHolder[coOrds[0]][coOrds[1]].getComponents()[1]);
                             repaint();
                             validate();
+                            p.setPosition(90);
                         }else if(!(p.getToken().getColour().equals(winningColour))) {
                             panelHolder[coOrds[0]][coOrds[1]].remove(panelHolder[coOrds[0]][coOrds[1]].getComponents()[1]);
                             repaint();
                             validate();
+                            p.setPosition(90);
                         }
                     }
-                    newGame();
+                    player.setWinner(false);
                 }
 
                 counter++;
@@ -247,13 +287,13 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
             try {
                 InputOutput.objectOutputStream();
             } catch (Exception e1) {
-                e1.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error saving the file!");
             }
         }else if(e.getActionCommand().equals("Open")) {
             try {
                 InputOutput.objectInputStream();
             } catch (Exception e1) {
-                e1.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error opening the file!");
             }
         }else if(e.getActionCommand().equals("Quit")) {
             System.exit(0);

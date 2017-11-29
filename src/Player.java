@@ -1,9 +1,11 @@
 import javax.swing.*;
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Player extends Person implements Serializable {
     private int position;
     private Token token;
+    private int wins;
     private boolean winner;
 
     public Player() {
@@ -15,6 +17,7 @@ public class Player extends Person implements Serializable {
         setToken(new Token());
         setPosition(90);
         setWinner(false);
+        setWins(0);
     }
 
     public int getPosition() {
@@ -31,6 +34,14 @@ public class Player extends Person implements Serializable {
 
     public void setToken(Token token) {
         this.token = token;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public void setWins(int wins) {
+        this.wins = wins;
     }
 
     public void setWinner(boolean winner) {
@@ -68,6 +79,10 @@ public class Player extends Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Name: " + getName() +"\nPosition: " + getPosition() + "\n" + getToken().toString() + "\n\n";
+        String squareNum = Arrays.toString(Convert.convert(this));
+        squareNum.replace("[","");
+        squareNum.replace("]","");
+        squareNum.replace(",", "");
+        return "Name: " + getName() +"\nPosition: " + squareNum + "\n" + getToken().toString() + "\nWins: " + getWins() + "\n\n";
     }
 }

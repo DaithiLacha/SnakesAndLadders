@@ -1,4 +1,6 @@
-public abstract class Person implements PlayerActions {
+import java.io.Serializable;
+
+public abstract class Person implements PlayerActions, Serializable {
     private String name;
 
     public Person() {

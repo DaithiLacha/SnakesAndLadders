@@ -1,13 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class ColourGUI extends JFrame implements ActionListener {
-    JButton redButton;
-    JButton blueButton;
-    JButton greenButton;
-    JButton yellowButton;
+    private static int blueSelected;
+    private static int redSelected;
+    private static int greenSelected;
+    private static int yellowSelected;
 
     public ColourGUI() {
         setTitle("Select your piece");
@@ -20,22 +19,22 @@ public class ColourGUI extends JFrame implements ActionListener {
         boardPanel.setLayout(layout);
         JLabel greenLabel = new JLabel(SnakesAndLaddersGUI.green);
         boardPanel.add(greenLabel);
-        greenButton = new JButton("Green");
+        JButton greenButton = new JButton("Green");
         boardPanel.add(greenButton);
         greenButton.addActionListener(this);
         JLabel blueLabel = new JLabel(SnakesAndLaddersGUI.blue);
         boardPanel.add(blueLabel);
-        blueButton = new JButton("Blue");
+        JButton blueButton = new JButton("Blue");
         boardPanel.add(blueButton);
         blueButton.addActionListener(this);
         JLabel redLabel = new JLabel(SnakesAndLaddersGUI.red);
         boardPanel.add(redLabel);
-        redButton = new JButton("Red");
+        JButton redButton = new JButton("Red");
         boardPanel.add(redButton);
         redButton.addActionListener(this);
         JLabel yellowLabel = new JLabel(SnakesAndLaddersGUI.yellow);
         boardPanel.add(yellowLabel);
-        yellowButton = new JButton("Yellow");
+        JButton yellowButton = new JButton("Yellow");
         boardPanel.add(yellowButton);
         yellowButton.addActionListener(this);
 
@@ -44,21 +43,41 @@ public class ColourGUI extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("Blue")) {
-            SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Blue"));
-            SnakesAndLaddersGUI.count++;
-            setVisible(false);
+            if(blueSelected == 1) {
+                JOptionPane.showMessageDialog(null, "That colour has already been selected... try again");
+            }else {
+                blueSelected++;
+                SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Blue"));
+                SnakesAndLaddersGUI.count++;
+                setVisible(false);
+            }
         }else if(e.getActionCommand().equals("Red")) {
-            SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Red"));
-            SnakesAndLaddersGUI.count++;
-            setVisible(false);
+            if(redSelected == 1) {
+                JOptionPane.showMessageDialog(null, "That colour has already been selected... try again");
+            }else {
+                redSelected++;
+                SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Red"));
+                SnakesAndLaddersGUI.count++;
+                setVisible(false);
+            }
         }else if(e.getActionCommand().equals("Yellow")) {
-            SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Yellow"));
-            SnakesAndLaddersGUI.count++;
-            setVisible(false);
+            if(yellowSelected == 1) {
+                JOptionPane.showMessageDialog(null, "That colour has already been selected... try again");
+            }else {
+                yellowSelected++;
+                SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Yellow"));
+                SnakesAndLaddersGUI.count++;
+                setVisible(false);
+            }
         }else if(e.getActionCommand().equals("Green")) {
-            SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Green"));
-            SnakesAndLaddersGUI.count++;
-            setVisible(false);
+            if (greenSelected == 1) {
+                JOptionPane.showMessageDialog(null, "That colour has already been selected... try again");
+            } else {
+                greenSelected++;
+                SnakesAndLaddersGUI.players.get(SnakesAndLaddersGUI.count).setToken(new Token("Green"));
+                SnakesAndLaddersGUI.count++;
+                setVisible(false);
+            }
         }
     }
 }
