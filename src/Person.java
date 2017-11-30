@@ -6,7 +6,7 @@ public abstract class Person implements PlayerActions, Serializable {
     /**
      * No argument constructor for Person
      */
-    public Person() {
+    Person() {
         this("Unknown");
     }
 

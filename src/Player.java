@@ -11,7 +11,7 @@ public class Player extends Person implements Serializable {
     /**
      * No argument constructor for Player
      */
-    public Player() {
+    Player() {
        this("Unknown");
     }
 

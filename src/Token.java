@@ -27,7 +27,7 @@ public class Token implements Serializable {
     /**
      * Mutator method for the colour
      */
-    private void setColour(String colour) {
+    void setColour(String colour) {
         this.colour = colour;
     }
 
