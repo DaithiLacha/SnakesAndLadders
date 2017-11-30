@@ -44,19 +44,19 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
     /**
      * JLabel to hold the previous location of the blue piece so it can then be removed
      */
-    JLabel currentBluePiece;
+    private JLabel currentBluePiece;
     /**
      * JLabel to hold the previous location of the red piece so it can then be removed
      */
-    JLabel currentRedPiece;
+    private JLabel currentRedPiece;
     /**
      * JLabel to hold the previous location of the green piece so it can then be removed
      */
-    JLabel currentGreenPiece;
+    private JLabel currentGreenPiece;
     /**
      * JLabel to hold the previous location of the yellow piece so it can then be removed
      */
-    JLabel currentYellowPiece;
+    private JLabel currentYellowPiece;
     /**
      * int to count through the player turns, resets after last player in a rounds turn
      */
