@@ -18,7 +18,7 @@ public class Player extends Person implements Serializable {
     /**
      * Single argument constructor for Player
      */
-    public Player(String name) {
+    Player(String name) {
         super(name);
         setToken(new Token());
         setPosition(90);
@@ -29,56 +29,56 @@ public class Player extends Person implements Serializable {
     /**
      * Accessor method for the position
      */
-    public int getPosition() {
+    int getPosition() {
         return position;
     }
 
     /**
      * Mutator method for the position
      */
-    public void setPosition(int position) {
+    void setPosition(int position) {
         this.position = position;
     }
 
     /**
      * Accessor method for the token
      */
-    public Token getToken() {
+    Token getToken() {
         return token;
     }
 
     /**
      * Mutator method for the token
      */
-    public void setToken(Token token) {
+    void setToken(Token token) {
         this.token = token;
     }
 
     /**
      * Accessor method for the wins
      */
-    public int getWins() {
+    int getWins() {
         return wins;
     }
 
     /**
      * Mutator method for the wins
      */
-    public void setWins(int wins) {
+    void setWins(int wins) {
         this.wins = wins;
     }
 
     /**
      * Accessor method for the winner
      */
-    public boolean isWinner() {
+    boolean isWinner() {
         return winner;
     }
 
     /**
      * Mutator method for the winner
      */
-    public void setWinner(boolean winner) {
+    void setWinner(boolean winner) {
         this.winner = winner;
     }
 

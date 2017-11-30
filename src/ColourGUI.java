@@ -11,7 +11,7 @@ public class ColourGUI extends JFrame implements ActionListener {
     /**
      * Constructor for the game piece selection GUI
      */
-    public ColourGUI() {
+    ColourGUI() {
         setTitle("Select your piece");
         setSize(240, 350);
         Container pane = getContentPane();

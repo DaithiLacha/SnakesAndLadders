@@ -13,14 +13,14 @@ public abstract class Person implements PlayerActions, Serializable {
     /**
      * Single-argument constructor for Person
      */
-    public Person(String name) {
+    Person(String name) {
         setName(name);
     }
 
     /**
      * Accessor method for the name
      */
-    public String getName() {
+    String getName() {
         return name;
     }
 

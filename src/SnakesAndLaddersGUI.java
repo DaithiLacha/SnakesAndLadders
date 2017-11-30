@@ -66,7 +66,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
     /**
      * Constructor for the GUI which will include the game board as well as the roll dice button
      */
-    public SnakesAndLaddersGUI() {
+    SnakesAndLaddersGUI() {
         newGame();
         ImageIcon snake = new ImageIcon("images/Snake.png");
         ImageIcon ladder = new ImageIcon("images/Ladder.png");

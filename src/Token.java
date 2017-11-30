@@ -6,28 +6,28 @@ public class Token implements Serializable {
     /**
      * No argument constructor for the token
      */
-    public Token() {
+    Token() {
         this("Unspecified");
     }
 
     /**
      * Single argument constructor for the token
      */
-    public Token(String colour) {
+    Token(String colour) {
         setColour(colour);
     }
 
     /**
      * Accessor method for the colour
      */
-    public String getColour() {
+    String getColour() {
         return colour;
     }
 
     /**
      * Mutator method for the colour
      */
-    public void setColour(String colour) {
+    private void setColour(String colour) {
         this.colour = colour;
     }
 

@@ -5,7 +5,7 @@ public class DetermineSquareType {
      * Method to determine what kind of square the player has landed on and what to do afterwards
      * depending on result
      */
-    public static void determineSquareType(Player p) {
+    static void determineSquareType(Player p) {
         int[] pos = Convert.convert(p);
         if((pos[0] != 0) && (pos[0] % 2 == 0) && (pos[1] == 9)) {
             // call the snake method
@@ -32,7 +32,7 @@ public class DetermineSquareType {
     /**
      * Method to move a player backwards after landing on a snake
      */
-    public static void snake(Player p) {
+    private static void snake(Player p) {
         int xCo, yCo;
         int[] coOrds = Convert.convert(p);
         int snakeLength = (int)((Math.random() * 9) + 4);
@@ -63,7 +63,7 @@ public class DetermineSquareType {
     /**
      * Method to move a player forward after landing on a ladder
      */
-    public static void ladder(Player p) {
+    private static void ladder(Player p) {
         int  yCo;
         int[] coOrds = Convert.convert(p);
         int ladderLength = (int)((Math.random() * 9) + 4);

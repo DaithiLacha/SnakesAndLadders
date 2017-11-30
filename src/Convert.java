@@ -2,7 +2,7 @@ public class Convert {
     /**
      * Method to return the square number corresponding to the player's position attribute value
      */
-    public static int[] convert(Player p) {
+    static int[] convert(Player p) {
         int position, squareNum;
         int[] coOrds = new int[2];
         position = p.getPosition();
@@ -20,7 +20,7 @@ public class Convert {
     /**
      * Method to return the player's position attribute value corresponding to square number
      */
-    public static int convertSquareToPos(int[] coOrds) {
+    static int convertSquareToPos(int[] coOrds) {
         String num;
         int number;
         if((coOrds[0] % 2) == 0) {
@@ -40,7 +40,7 @@ public class Convert {
      * Method to return array containing the players x & y co-ordinates on the board - used for
      * label removal
      */
-    public static int[] getCoOrds(Player p) {
+    static int[] getCoOrds(Player p) {
         int xCo;
         int yCo;
         int[] coOrds = new int[2];

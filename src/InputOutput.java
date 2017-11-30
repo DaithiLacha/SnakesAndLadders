@@ -7,7 +7,7 @@ public class InputOutput {
     /**
      * Method to write the arraylist of players to a file
      */
-    public static void objectOutputStream() throws Exception {
+    static void objectOutputStream() throws Exception {
         File outFile = new File("objects.data");
         FileOutputStream outFileStream = new FileOutputStream(outFile);
         ObjectOutputStream os = new ObjectOutputStream(outFileStream);
@@ -20,7 +20,7 @@ public class InputOutput {
     /**
      * Method to read the arraylist of players from a file
      */
-    public static void objectInputStream() throws Exception {
+    static void objectInputStream() throws Exception {
         File inFile = new File("objects.data");
         FileInputStream inFileStream = new FileInputStream(inFile);
         ObjectInputStream in = new ObjectInputStream(inFileStream);
