@@ -339,12 +339,14 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
             try {
                 // write the objects i.e. the players to a file
                 InputOutput.objectOutputStream();
+                JOptionPane.showMessageDialog(null, "Writing to File");
             } catch (Exception e1) {
                 // error message if there is a problem with the write
                 JOptionPane.showMessageDialog(null, "Error saving the file!");
             }
         }else if(e.getActionCommand().equals("Open")) {
             try {
+                JOptionPane.showMessageDialog(null, "Reading into Program");
                 // read the file back into the program
                 InputOutput.objectInputStream();
             } catch (Exception e1) {
