@@ -1,3 +1,6 @@
+/*
+ * Created by David O'Connor T00196827
+ */
 import javax.swing.*;
 
 public class DetermineSquareType {

@@ -1,3 +1,6 @@
+/*
+ * Created by David O'Connor T00196827
+ */
 public class Convert {
     /**
      * Method to return the square number corresponding to the player's position attribute value

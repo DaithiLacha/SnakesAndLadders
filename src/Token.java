@@ -1,3 +1,6 @@
+/*
+ * Created by David O'Connor T00196827
+ */
 import java.io.Serializable;
 
 public class Token implements Serializable {
