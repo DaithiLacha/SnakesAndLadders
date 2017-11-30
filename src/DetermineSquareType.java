@@ -57,7 +57,7 @@ public class DetermineSquareType {
             }
         }
         JOptionPane.showMessageDialog(null, "You landed on a snake go back " + snakeLength + " spaces");
-        p.setPosition(Convert.convertSquareNumToPosition(coOrds));
+        p.setPosition(Convert.convertSquareToPos(coOrds));
     }
 
     /**
@@ -86,6 +86,6 @@ public class DetermineSquareType {
             }
         }
         JOptionPane.showMessageDialog(null, "You landed on a ladder advance " + ladderLength + " spaces");
-        p.setPosition(Convert.convertSquareNumToPosition(coOrds));
+        p.setPosition(Convert.convertSquareToPos(coOrds));
     }
 }

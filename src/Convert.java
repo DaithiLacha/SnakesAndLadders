@@ -20,7 +20,7 @@ public class Convert {
     /**
      * Method to return the player's position attribute value corresponding to square number
      */
-    public static int convertSquareNumToPosition(int[] coOrds) {
+    public static int convertSquareToPos(int[] coOrds) {
         String num;
         int number;
         if((coOrds[0] % 2) == 0) {

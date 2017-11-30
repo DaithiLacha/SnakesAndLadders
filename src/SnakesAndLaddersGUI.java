@@ -177,7 +177,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         String playerDetails = "";
         // iterating through the players arraylist using an enhanced for-loop
         for(Player p : players) {
-            playerDetails += p.toString();
+            playerDetails += ("Player: " + p.getName() + "\nGame Piece: " + p.getToken().getColour() + "\n\n");
         }
         JOptionPane.showMessageDialog(null, playerDetails);
     }
