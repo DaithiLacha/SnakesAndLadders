@@ -162,7 +162,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
     /**
      * Adding a player to the game
      */
-    public void addPlayer() {
+    private void addPlayer() {
         String name = JOptionPane.showInputDialog("Enter Name");
         players.add(new Player(name));
         // launching the token selection GUI
@@ -173,7 +173,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
     /**
      * Displaying player details
      */
-    public void displayPlayers() {
+    private void displayPlayers() {
         String playerDetails = "";
         // iterating through the players arraylist using an enhanced for-loop
         for(Player p : players) {
@@ -185,7 +185,7 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
     /**
      * Starting a new game
      */
-    public void newGame(){
+    private void newGame(){
         // resetting the the players list on launch of a new game
         players = new ArrayList<>();
         count = 0;
