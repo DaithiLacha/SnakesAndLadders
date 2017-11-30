@@ -5,25 +5,63 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
-    // JMenus, fileMenu for the new/save/open/quit functionality & playerMenu to add players and display player details
+    /**
+     *  JMenu fileMenu for the new/save/open/quit functionality
+     */
     private JMenu fileMenu;
+    /**
+     * JMenu playerMenu to add players and display player details
+     */
     private JMenu playerMenu;
-    //Players which will take part in the game
+    /**
+     * Array List players of Players which will take part in the game
+     */
     static ArrayList<Player> players;
-    // 2D array which will be used to populate the board with its individual labels
+    /**
+     * 2D array which will be used to populate the board with its individual labels
+     */
     private JPanel[][] panelHolder = new JPanel[10][10];
+    /**
+     * counter which increments on creation of a player
+     */
     static int count = 0;
-    // Images for the player tokens
+    /**
+     * Image for the blue game piece
+     */
     static ImageIcon blue = new ImageIcon("images/bluePiece.png");
+    /**
+     * Image for the red game piece
+     */
     static ImageIcon red = new ImageIcon("images/redPiece.png");
+    /**
+     * Image for the green game piece
+     */
     static ImageIcon green = new ImageIcon("images/greenPiece.png");
+    /**
+     * Image for the yellow game piece
+     */
     static ImageIcon yellow = new ImageIcon("images/yellowPiece.png");
-    // JLabels to hold the token image at the players previous location so it can then be removed
+    /**
+     * JLabel to hold the previous location of the blue piece so it can then be removed
+     */
     JLabel currentBluePiece;
+    /**
+     * JLabel to hold the previous location of the red piece so it can then be removed
+     */
     JLabel currentRedPiece;
+    /**
+     * JLabel to hold the previous location of the green piece so it can then be removed
+     */
     JLabel currentGreenPiece;
+    /**
+     * JLabel to hold the previous location of the yellow piece so it can then be removed
+     */
     JLabel currentYellowPiece;
+    /**
+     * int to count through the player turns, resets after last player in a rounds turn
+     */
     private int counter;
+
 
     /**
      * Constructor for the GUI which will include the game board as well as the roll dice button
