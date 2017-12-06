@@ -227,6 +227,10 @@ public class SnakesAndLaddersGUI extends JFrame implements ActionListener{
         // resetting the the players list on launch of a new game
         players = new ArrayList<>();
         count = 0;
+        ColourGUI.blueSelected = 0;
+        ColourGUI.redSelected = 0;
+        ColourGUI.greenSelected = 0;
+        ColourGUI.yellowSelected = 0;
         JOptionPane.showMessageDialog(null, "New Game started feel free to add a few players");
     }
 

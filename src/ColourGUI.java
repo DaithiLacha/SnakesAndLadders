@@ -3,10 +3,10 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ColourGUI extends JFrame implements ActionListener {
-    private static int blueSelected;
-    private static int redSelected;
-    private static int greenSelected;
-    private static int yellowSelected;
+    static int blueSelected;
+    static int redSelected;
+    static int greenSelected;
+    static int yellowSelected;
 
     /**
      * Constructor for the game piece selection GUI
